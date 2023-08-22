@@ -1,0 +1,58 @@
+﻿@using ConjuntoBackend2
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Tutores</title>
+</head>
+<body>
+    <div>
+        <form method="post">
+            <h2>Datos del nuevo Tutor</h2>
+            <p>Cedula:<input type="text" name="cedula" placeholder="##-###-#" /> </p>
+            <p>Nombre completo: <input type="text" name="fullname" /> </p>
+            <p>Salario: <input type="number" name="salario" /> </p>
+            <p><input type="submit" value="Eviar datos" /></p>
+        </form>
+        @* Ingresar un nuevo Tutor *@
+        @{
+            if (IsPost)
+            {
+                //Recuperamos los datos enviados desde el formulario
+                string cedula = Request["cedula"];
+                string fullname = Request["fullname"];
+                decimal salario = decimal.Parse( Request["salario"]);
+                int id = Global.Tutores.Count + 1;
+
+                Global.Tutor NuevoTutor = new Global.Tutor(id, cedula, fullname, salario);
+
+                Global.Tutores.Add(NuevoTutor);
+            }
+
+        }
+
+        @* Listar Alumnos *@
+        <h2>Lista de Tutores (@Global.Tutores.Count)</h2>
+        <table>
+            <tr>
+                <th>Cedula</th>
+                <th>Nombre completo</th>
+                <th>Salario</th>
+            </tr>
+            @foreach (var item in Global.Tutores.OrderByDescending(x => x.Salario))
+            {
+                <tr>
+                    <td>@item.Cedula</td>
+                    <td>@item.Fullname</td>
+                    <td>@item.Salario</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

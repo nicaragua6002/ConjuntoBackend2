@@ -98,6 +98,7 @@
     <Content Include="index.cshtml" />
     <Content Include="Alumnos.cshtml" />
     <None Include="packages.config" />
+    <Content Include="Tutores.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

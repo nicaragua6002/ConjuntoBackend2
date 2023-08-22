@@ -18,6 +18,9 @@ namespace ConjuntoBackend2
         //Lista de Alumnos vacia
         public static List<Alumno> Alumnos = new List<Alumno>();
 
+        //Lista de Tutores
+        public static List<Tutor> Tutores = new List<Tutor>();
+
         //Estructura
         public class Usuario
         {
@@ -65,6 +68,19 @@ namespace ConjuntoBackend2
             string cedula;
             string fullname;
            decimal salario;
+
+            public Tutor(int id, string cedula, string fullname, decimal salario)
+            {
+                this.id = id;
+                this.cedula = cedula;
+                this.fullname = fullname;
+                this.salario = salario;
+            }
+
+            public int Id { get => id; set => id = value; }
+            public string Cedula { get => cedula; set => cedula = value; }
+            public string Fullname { get => fullname; set => fullname = value; }
+            public decimal Salario { get => salario; set => salario = value; }
         }
     }
 }
