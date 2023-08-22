@@ -1,0 +1,45 @@
+﻿@using ConjuntoBackend2
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Lista de usuarios</title>
+</head>
+<body>
+    <div>
+    <form method="post">
+        <h2>Datos del nuevo usuario</h2>
+        <p>UserName:<input type="email" name="username" placeholder="user@dominio.com" /> </p>
+        <p>Password: <input type="password" name="password"/> </p>
+        <p><input type="submit" value="Eviar datos" /></p>
+    </form>
+        @* Ingresar un nuevo usuario *@
+        @{ 
+            if (IsPost)
+            {
+                //Recuperamos los datos enviados desde el formulario
+                string username = Request["username"];
+                string password = Request["password"];
+                int id = Global.Usuarios.Count + 1;
+
+                Global.Usuario NuevoUsuario = new Global.Usuario(id, username, password);
+
+                Global.Usuarios.Add(NuevoUsuario);
+            }
+
+        }
+        
+        @* Listar Usuario *@
+        <h2>Lista de usuarios (@Global.Usuarios.Count)</h2>
+        @foreach (var item in Global.Usuarios)
+        {
+            <h3>@item.Username</h3>
+        }
+    </div>
+</body>
+</html>

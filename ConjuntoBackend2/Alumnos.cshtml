@@ -1,0 +1,47 @@
+﻿@using ConjuntoBackend2
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Alumnos</title>
+</head>
+<body>
+    <div>
+    <form method="post">
+        <h2>Datos del nuevo alumno</h2>
+        <p>Carnet:<input type="text" name="carnet" placeholder="##-###-#" /> </p>
+        <p>Nombre: <input type="text" name="nombre" /> </p>
+        <p>Apellido: <input type="text" name="apellido" /> </p>
+        <p><input type="submit" value="Eviar datos" /></p>
+    </form>
+    @* Ingresar un nuevo alumno *@
+    @{
+        if (IsPost)
+        {
+            //Recuperamos los datos enviados desde el formulario
+            string carnet = Request["carnet"];
+            string nombre = Request["nombre"];
+            string apellido = Request["apellido"];
+            int id = Global.Alumnos.Count + 1;
+
+            Global.Alumno NuevoAlumno = new Global.Alumno(id, carnet, nombre, apellido);
+
+            Global.Alumnos.Add(NuevoAlumno);
+        }
+
+    }
+
+    @* Listar Alumnos *@
+    <h2>Lista de alumnos (@Global.Alumnos.Count)</h2>
+    @foreach (var item in Global.Alumnos.OrderBy(x=>x.Apellido))
+    {
+        <h3>@item.Apellido @item.Nombre</h3>
+    }
+    </div>
+</body>
+</html>
